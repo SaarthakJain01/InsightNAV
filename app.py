@@ -4,7 +4,7 @@ import joblib
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Set page config
-st.set_page_config(page_title="InsightNAV | Mutual Fund Dashboard")
+st.set_page_config(page_title="InsightNAV | Mutual Fund Dashboard", page_icon="📊")
 
 
 # --- Load saved data ---
@@ -96,12 +96,9 @@ if user_query:
 
         with st.expander("📘 How to Interpret These Metrics"):
             st.markdown("""
-                        **Annual Volatility:** Shows price fluctuation over the past year.
-
+                        **Annual Volatility:** Shows price fluctuation over the past year.  
                         **Beta:** Indicates sensitivity to market movements.    
-                        
                         **Alpha:** Measures outperformance relative to a benchmark.  
-                        
                         **Sharpe Ratio:** Indicates risk-adjusted return. A value above 1 is considered good.
             """)
         
@@ -124,15 +121,15 @@ if user_query:
             st.plotly_chart(fig, use_container_width=True)
 
         # ---------------- ROW 4 and more ----------------
-        st.markdown("### 🔁 Rolling CAGR: Mutual Fund vs Benchmark")
-
-        with st.expander("ℹ️ What is Rolling CAGR?"):
-            st.markdown("""
-            Rolling CAGR tracks the **compound annual growth rate** over rolling time windows (1Y, 3Y, 5Y).  
-            It helps investors evaluate **consistency** of returns rather than a single-point snapshot.
-            """)
-        
         if get_financial_year_span(nav_df, date_column='Date')>= 2:
+            st.markdown("### 🔁 Rolling CAGR: Mutual Fund vs Benchmark")
+
+            with st.expander("ℹ️ What is Rolling CAGR?"):
+                st.markdown("""
+                Rolling CAGR tracks the **compound annual growth rate** over rolling time windows (1Y, 3Y, 5Y).  
+                It helps investors evaluate **consistency** of returns rather than a single-point snapshot.
+                """)        
+        
             cagr_1 = merge_cagr_s(nav_df, index_data, period=1)
             fig_2 = plot_fund_vs_index(cagr_1, title='1-Year Rolling CAGR: Mutual Fund vs Benchmark')
             st.plotly_chart(fig_2, use_container_width=True)
