@@ -97,8 +97,11 @@ if user_query:
         with st.expander("📘 How to Interpret These Metrics"):
             st.markdown("""
                         **Annual Volatility:** Shows price fluctuation over the past year.
+
                         **Beta:** Indicates sensitivity to market movements.    
+                        
                         **Alpha:** Measures outperformance relative to a benchmark.  
+                        
                         **Sharpe Ratio:** Indicates risk-adjusted return. A value above 1 is considered good.
             """)
         
